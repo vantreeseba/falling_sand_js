@@ -1,6 +1,6 @@
 import { Grid } from './grid.js';
 
-const s = 128;
+const s = 384;
 
 const grid = new Grid(s, s);
 /** @type HTMLCanvasElement */
@@ -15,12 +15,21 @@ canvas.style.height = '90vh';
 document.body.appendChild(canvas);
 const ctx = canvas.getContext('2d');
 
-let fps = 90;
+let fps = 120;
 let fpsInterval = 1000 / fps;
 let now, elapsed, then;
 then = Date.now();
 
+// let mouseDown = false;
+//
+// canvas.onmousedown = (ev) => (mouseDown = true);
+// canvas.onmouseup = (ev) => (mouseDown = false);
+// canvas.onmouseleave = (ev) => (mouseDown = false);
+
 canvas.onmousemove = (ev) => {
+  //   if (mouseDown == false) {
+  //     return;
+  //   }
   const wRatio = canvas.width / canvas.offsetWidth;
   const pixX = Math.floor(ev.offsetX * wRatio);
   const hRatio = canvas.height / canvas.offsetHeight;
@@ -28,7 +37,23 @@ canvas.onmousemove = (ev) => {
 
   const val = Math.floor((Math.random() + 0.4) * 100) / 100;
 
-  grid.set(pixX, pixY, val);
+  const brushSize = 5;
+  const offset = Math.floor(brushSize / 2);
+  for (let x = -offset; x <= offset; x++) {
+    for (let y = -offset; y <= offset; y++) {
+      grid.set(pixX + x, pixY + y, val);
+    }
+  }
+
+  //   grid.set(pixX, pixY, val);
+  //   grid.set(pixX, pixY - 1, val);
+  //   grid.set(pixX, pixY + 1, val);
+  //   grid.set(pixX + 1, pixY, val);
+  //   grid.set(pixX - 1, pixY, val);
+  //   grid.set(pixX + 1, pixY + 1, val);
+  //   grid.set(pixX - 1, pixY - 1, val);
+  //   grid.set(pixX - 1, pixY + 1, val);
+  //   grid.set(pixX + 1, pixY - 1, val);
 };
 
 const render = () => {

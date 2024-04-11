@@ -21,8 +21,8 @@ export class Grid {
   }
 
   update() {
-    for (var x = this.width; x >= 0; x--) {
-      for (var y = this.height; y >= 0; y--) {
+    for (var y = this.height; y >= 0; y--) {
+      for (var x = 0; x < this.width; x++) {
         const value = this.get(x, y);
         const filled = value > 0;
         const emptyBelow = this.get(x, y + 1) == 0;
