@@ -27,8 +27,9 @@ select.onchange = (ev) => (currentVal = Number(ev.target.value));
 
 canvas.style.imageRendering = 'pixelated';
 canvas.style.objectFit = 'cover';
-canvas.style.width = '100vw';
-// canvas.style.height = '90vh';
+canvas.style.maxWidth = '100vw';
+// canvas.style.width = '50vw';
+canvas.style.height = '90vh';
 
 document.body.appendChild(canvas);
 const ctx = canvas.getContext('2d');
